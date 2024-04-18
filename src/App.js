@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+
 import './App.css';
+import {useState} from 'react'
+import { Container,Col,Row } from 'react-bootstrap';
+import CustomTable from './components/Details';
+import Dashboard from './components/Dashboard';
+import {ContextConfig} from './ContextConfig'
+import {Routes,Route} from 'react-router'
 
 function App() {
+  const [job,setjob] = useState()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <Container className='appcontainer' fluid>
+    <ContextConfig.Provider value={{job,setjob}}>
+      <Routes>
+        <Route path='/' element={<Dashboard/>}/>
+        <Route path='/details' element={<CustomTable/>}/>
+      </Routes>
+    </ContextConfig.Provider>
+  </Container>
   );
 }
 
